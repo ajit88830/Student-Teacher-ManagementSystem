@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Teachers List</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen">
+  <nav class="bg-gradient-to-r from-indigo-700 to-purple-800 text-white shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold flex items-center gap-2">
+        <i class="fas fa-chalkboard-teacher"></i> SMS
+      </a>
+      <div class="hidden md:flex space-x-8">
+        <a th:href="@{/students}" class="font-medium hover:text-yellow-300 transition">Students</a>
+        <a th:href="@{/teachers}" class="font-medium hover:text-yellow-300 transition">Teachers</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mx-auto px-4 py-8 max-w-6xl">
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-4xl font-extrabold text-purple-700">Teachers List</h1>
+      <a th:href="@{/teachers/new}"
+         class="bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-2.5 px-6 rounded-lg shadow-lg hover:shadow-xl flex items-center gap-2 transform hover:scale-105 transition">
+        <i class="fas fa-plus"></i> Add Teacher
+      </a>
+    </div>
+
+    <div th:if="${teachers != null and !teachers.isEmpty()}">
+      <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <table class="w-full">
+          <thead class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
+            <tr>
+              <th class="px-6 py-4 text-left font-semibold">NAME</th>
+              <th class="px-6 py-4 text-left font-semibold">EMAIL</th>
+              <th class="px-6 py-4 text-left font-semibold">SUBJECT</th>
+              <th class="px-6 py-4 text-center font-semibold">ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr th:each="teacher : ${teachers}" class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4 font-medium text-gray-800" 
+                  th:text="${teacher.firstName + ' ' + teacher.lastName}"></td>
+              <td class="px-6 py-4 text-indigo-600 font-medium" th:text="${teacher.email}"></td>
+              <td class="px-6 py-4 text-gray-700" th:text="${teacher.subject}"></td>
+              <td class="px-6 py-4 text-center space-x-2">
+                <a th:href="@{/teachers/edit/{id}(id=${teacher.id})}"
+                   class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-medium shadow hover:shadow-md transition inline-flex items-center gap-1">
+                  <i class="fas fa-edit"></i> Edit
+                </a>
+                <a th:href="@{/teachers/{id}(id=${teacher.id})}"
+                   class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium shadow hover:shadow-md transition inline-flex items-center gap-1"
+                   onclick="return confirm('Delete this teacher?')">
+                  <i class="fas fa-trash"></i> Delete
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div th:if="${teachers == null or teachers.isEmpty()}" class="text-center py-16 bg-white rounded-2xl shadow-lg">
+      <i class="fas fa-chalkboard-teacher text-6xl text-gray-300 mb-4"></i>
+      <p class="text-2xl text-gray-600 mb-4">No teachers found</p>
+      <a th:href="@{/teachers/new}" class="text-purple-600 hover:underline font-semibold text-lg">Add your first teacher</a>
+    </div>
+
+    <div class="mt-10 text-center">
+      <a th:href="@{/}" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center justify-center gap-1">
+        <i class="fas fa-home"></i> Back to Home
+      </a>
+    </div>
+  </div>
+</body>
+</html>
