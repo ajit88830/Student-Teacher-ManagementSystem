@@ -1,4 +1,1 @@
-# Spring MVC Tutorial | Spring Boot | Full Course [2021]
-Spring MVC Tutorial | Spring Boot | Full Course [2021] at https://youtu.be/Ku3gsv7_bCc
-
-Blog tutorial at https://www.javaguides.net/2021/05/spring-boot-crud-tutorial.html
+This project is to learn the CRUD operation and how to modules are connected to each other how the JDBC connection works.And how front-end works.This is an Spring boot project.
